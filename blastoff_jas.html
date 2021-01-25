@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<title>BLASTOFF!</title>
+
+    <head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <style>
+
+            * {box-sizing: border-box;}
+
+            html {margin: 0;background-color: black;}
+
+            body {margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                    font-size: 1vw;}
+
+            div#images {width: 75%; display: block; position: relative;}
+
+            img#back-splash {width: 90%; display: block; position: absolute; left: 5%;}
+            
+            img#rocket-ship {width: 5%; position: absolute; left: 75%; bottom: 5%; transition: 2s ease-in;}
+
+            .rocket > button {font-size: 3vw; position: absolute; text-align: center; font-family: fantasy; background-color: rgba(0, 0, 0, 0);
+                                color: white; top: 35%; left: 25%; width: 50%; border: none; transition: .5s ease-in-out;}
+            .rocket > button:hover {cursor: pointer; color: rgb(255, 0, 0); transition: .5s ease-in-out; transform: scale(1.1);}
+            .rocket > button:focus {outline: none;}
+
+            #timer {font-size: 3vw; position: absolute; text-align: center; font-family: fantasy; background-color: rgba(0, 0, 0, 0);
+                                color: white; top: 45%; left: 25%; width: 50%; border: none; transition: .5s ease-in-out;}
+            #success-message {font-size: 3vw; position: absolute; text-align: center; font-family: fantasy; background-color: rgba(0, 0, 0, 0);
+                                color: white; top: 40%; left: 25%; width: 50%; border: none; transition: .5s ease-in-out; letter-spacing: 2%;
+                                font-weight: lighter;}
+
+        </style>
+
+    </head>
+
+<body>
+
+<div class="images">
+
+    <img id="back-splash" src="backsplash-blastoff.png">
+
+    <img id="rocket-ship" src="rocket.png">
+
+</div>
+
+<div class="rocket">
+    
+    <button id="btn-start" onclick="startTimer();">Initiate Launch Sequence</button>
+
+    <h2 id="timer"></h2>
+
+    <h2 id="success-message"></h2>
+
+</div>
+
+<script>
+
+// Below is the JavaScript function that is coded to countdown and launch
+//  launch a rocket into space.
+
+
+
+// I have declared the global variable 'count' being defined as "5" 
+//      the timer knows where to start counting down from.
+//
+// The variable 'counter' is also a global variable. The purpose behind 
+//      this is so that the two functions being called can access the 
+//      two variables.
+
+var count = 6;
+
+var counter;
+
+// Here the function 'startTimer()' starts the countdown timer when
+//      the button in HTML is clicked on. The 'setInterval()' method is calling
+//      the function 'timer()' in milliseconds on repeat, in this case 1000ms, 
+//      or 1 second. The 'setInterval()' method will continue calling the 
+//      function every second until it hits 'clearInterval()'. The 'clearInterval()'
+//      method will tell the 'setInterval()' method to stop calling the function.
+//
+//  The 'clearInterval()' method is only called once it has met certain conditions
+//      to be true. The condition to be met in this function is 'count <= 0'
+//      once that condition returns true, it moves on to the next condition, which
+//      is 'count <= -2', if that condition returns true then 'clearInterval()' is
+//      called and the timer is stopped returning the last set of functions.
+    
+
+function startTimer() {
+
+     counter = setInterval(timer, 1000);
+
+     document.getElementById("btn-start").innerHTML = "Sequence Initiated . . .<br>Launching In . . .";
+
+     document.getElementById("timer").innerHTML = "";
+
+       
+        function timer() {
+
+//  Here (count = count - 1) means 1 will be subtracted from count, which holds a value of (5), every 1000ms, 1 second.
+
+            count = count - 1;
+
+//  The 'if' condition declares that if (count <= 0) then it will return the set of commands that
+//      fall under its umbrella.
+
+                if (count <= 0) {
+
+                    document.getElementById("btn-start").innerHTML = "";
+
+                    document.getElementById("rocket-ship").style.bottom = "110%";
+
+                    document.getElementById("timer").style.display = "none";
+
+// The 'if' condition here is if count is less than or equal to -1 it will call the
+//      last set of functions.
+
+                            if (count <= -1) {
+
+                                document.getElementById("success-message").innerHTML = "Blast Off!";
+
+                                document.getElementById("btn-start").innerHTML = "";
+                            }         
+                }
+
+// Right here we are simply telling JavaScript where to display/find the HTML location of the timer.
+
+        document.getElementById("timer").innerHTML = count;
+
+        }
+}
+
+</script>
+
+
+
+
+
+        <footer>
+
+
+        </footer>
+
+
+</body>
+
+</html>
